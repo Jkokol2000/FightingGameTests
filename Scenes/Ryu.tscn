@@ -1,0 +1,53 @@
+[gd_scene load_steps=11 format=3 uid="uid://cljmo3bsr8puy"]
+
+[ext_resource type="Texture2D" uid="uid://kjg6rftswuiw" path="res://Sprites/FixedRyuSprites/RyuIdle1.png" id="1_bwrku"]
+[ext_resource type="Script" path="res://Scenes/Ryu.gd" id="1_eina7"]
+[ext_resource type="Script" path="res://Scenes/StateMachine.gd" id="2_ep52p"]
+[ext_resource type="Script" path="res://Scenes/Idle.gd" id="3_76o4s"]
+[ext_resource type="Script" path="res://Scenes/Move.gd" id="5_g3sw7"]
+[ext_resource type="Script" path="res://Scenes/Jump.gd" id="6_xhqd1"]
+[ext_resource type="Script" path="res://Scenes/Fall.gd" id="7_8ohte"]
+[ext_resource type="Script" path="res://Scenes/PlayerMoveComponent.gd" id="8_1gf23"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s5p6u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bwrku")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okgsn"]
+size = Vector2(77, 103)
+
+[node name="Ryu" type="CharacterBody2D"]
+script = ExtResource("1_eina7")
+
+[node name="RyuSprites" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_s5p6u")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-11.5, 25.5)
+shape = SubResource("RectangleShape2D_okgsn")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_ep52p")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_76o4s")
+
+[node name="Move" type="Node" parent="StateMachine"]
+script = ExtResource("5_g3sw7")
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("6_xhqd1")
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("7_8ohte")
+
+[node name="PlayerMoveComponent" type="Node2D" parent="."]
+script = ExtResource("8_1gf23")

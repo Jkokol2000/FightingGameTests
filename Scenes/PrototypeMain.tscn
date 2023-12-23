@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://biw4sq84tfdl7"]
+
+[ext_resource type="PackedScene" uid="uid://cljmo3bsr8puy" path="res://Scenes/Ryu.tscn" id="1_7458c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntmhk"]
+size = Vector2(1152, 20)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Ryu" parent="." instance=ExtResource("1_7458c")]
+position = Vector2(52, 550)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(10, 638)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(566, 0)
+shape = SubResource("RectangleShape2D_ntmhk")
